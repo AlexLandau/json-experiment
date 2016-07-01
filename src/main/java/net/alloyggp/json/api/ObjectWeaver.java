@@ -1,11 +1,8 @@
 package net.alloyggp.json.api;
 
 public abstract class ObjectWeaver<T> implements Weaver<T> {
-
     @Override
     public <N> T parse(N node, WeaverContext<N> context) {
-//        assert node.isObject();
-//        ObjectNode jsonObject = (ObjectNode) node;
         ObjectReader reader = context.createObjectReader(node);
         return parseObject(reader);
     }
@@ -20,5 +17,4 @@ public abstract class ObjectWeaver<T> implements Weaver<T> {
     }
 
     protected abstract void writeObject(T object, ObjectWriter<?> writer);
-
 }

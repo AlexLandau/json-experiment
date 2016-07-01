@@ -4,9 +4,7 @@ public abstract class ArrayWeaver<T> implements Weaver<T> {
 
     @Override
     public <N> T parse(N node, WeaverContext<N> context) {
-//        assert node.isArray();
-//        ArrayNode array = (ArrayNode) node;
-        ArrayReader reader = context.createArrayReader(node);//new ArrayReader(array);
+        ArrayReader reader = context.createArrayReader(node);
         return parseArray(reader);
     }
 
