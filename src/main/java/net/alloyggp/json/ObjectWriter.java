@@ -3,6 +3,8 @@ package net.alloyggp.json;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import net.alloyggp.json.api.Weaver;
+
 public class ObjectWriter {
     private final ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
 

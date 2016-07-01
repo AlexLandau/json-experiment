@@ -1,4 +1,4 @@
-package net.alloyggp.json;
+package net.alloyggp.json.api;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,6 +20,11 @@ import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.LongNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+
+import net.alloyggp.json.ArrayReader;
+import net.alloyggp.json.ArrayWriter;
+import net.alloyggp.json.ObjectReader;
+import net.alloyggp.json.ObjectWriter;
 
 public class JavaWeavers {
     private JavaWeavers() {
@@ -293,6 +298,22 @@ public class JavaWeavers {
                 for (Map.Entry<K, V> entry : object.entrySet()) {
                     writer.put(toStringFunction.apply(entry.getKey()), entry.getValue(), valueWeaver);
                 }
+            }
+        };
+    }
+
+    public static <E extends Enum<E>> Weaver<E> enumOf(final Class<E> enumClass) {
+        return new Weaver<E>() {
+            @Override
+            public E parse(JsonNode node) {
+                String name = node.asText();
+                return Enum.valueOf(enumClass, name);
+            }
+
+            @Override
+            public JsonNode weave(E object) {
+                String name = object.name();
+                return new TextNode(name);
             }
         };
     }

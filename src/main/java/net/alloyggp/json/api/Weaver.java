@@ -1,4 +1,4 @@
-package net.alloyggp.json;
+package net.alloyggp.json.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
+import net.alloyggp.json.api.Weaver;
+
 public class ArrayWriter {
     //TODO: Should this just add to an ArrayNode directly?
     //Requires ___.

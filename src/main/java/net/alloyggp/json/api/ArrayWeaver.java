@@ -1,7 +1,10 @@
-package net.alloyggp.json;
+package net.alloyggp.json.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import net.alloyggp.json.ArrayReader;
+import net.alloyggp.json.ArrayWriter;
 
 public abstract class ArrayWeaver<T> implements Weaver<T> {
 

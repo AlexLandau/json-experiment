@@ -2,6 +2,8 @@ package net.alloyggp.json;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import net.alloyggp.json.api.Weaver;
+
 //TODO: Should probably be Iterable
 public class ArrayReader {
     private final ArrayNode array;
