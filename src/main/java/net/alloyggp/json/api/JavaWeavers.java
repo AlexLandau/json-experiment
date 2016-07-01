@@ -12,20 +12,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Function;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.fasterxml.jackson.databind.node.DoubleNode;
-import com.fasterxml.jackson.databind.node.FloatNode;
-import com.fasterxml.jackson.databind.node.IntNode;
-import com.fasterxml.jackson.databind.node.LongNode;
-import com.fasterxml.jackson.databind.node.ShortNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-
-import net.alloyggp.json.ArrayReader;
-import net.alloyggp.json.ArrayWriter;
-import net.alloyggp.json.ObjectReader;
-import net.alloyggp.json.ObjectWriter;
-
 public class JavaWeavers {
     private JavaWeavers() {
         //Not instantiable
@@ -33,128 +19,109 @@ public class JavaWeavers {
 
     public static Weaver<Integer> INTEGER = new Weaver<Integer>() {
         @Override
-        public Integer parse(JsonNode node) {
-            if (!node.canConvertToInt()) {
-                throw new RuntimeException("Value of JsonNode cannot be converted to an integer: " + node);
-            }
-            return node.intValue();
+        public <N> Integer parse(N node, WeaverContext<N> context) {
+            return context.parseInteger(node);
         }
 
         @Override
-        public JsonNode weave(Integer i) {
-            return IntNode.valueOf(i);
+        public <N> N weave(Integer object, WeaverContext<N> context) {
+            return context.persistInteger(object);
         }
     };
 
     public static Weaver<Long> LONG = new Weaver<Long>() {
         @Override
-        public Long parse(JsonNode node) {
-            if (!node.canConvertToLong()) {
-                throw new RuntimeException("Value of JsonNode cannot be converted to a long: " + node);
-            }
-            return node.longValue();
+        public <N> Long parse(N node, WeaverContext<N> context) {
+            return context.parseLong(node);
         }
 
         @Override
-        public JsonNode weave(Long l) {
-            return LongNode.valueOf(l);
+        public <N> N weave(Long object, WeaverContext<N> context) {
+            return context.persistLong(object);
         }
     };
 
     public static Weaver<Double> DOUBLE = new Weaver<Double>() {
         @Override
-        public Double parse(JsonNode node) {
-            assert node.isDouble();
-            return node.doubleValue();
+        public <N> Double parse(N node, WeaverContext<N> context) {
+            return context.parseDouble(node);
         }
 
         @Override
-        public JsonNode weave(Double d) {
-            return DoubleNode.valueOf(d);
+        public <N> N weave(Double object, WeaverContext<N> context) {
+            return context.persistDouble(object);
         }
     };
 
     public static Weaver<Float> FLOAT = new Weaver<Float>() {
         @Override
-        public Float parse(JsonNode node) {
-            assert node.isFloat();
-            return node.floatValue();
+        public <N> Float parse(N node, WeaverContext<N> context) {
+            return context.parseFloat(node);
         }
 
         @Override
-        public JsonNode weave(Float f) {
-            return FloatNode.valueOf(f);
+        public <N> N weave(Float object, WeaverContext<N> context) {
+            return context.persistFloat(object);
         }
     };
 
     public static Weaver<Short> SHORT = new Weaver<Short>() {
         @Override
-        public Short parse(JsonNode node) {
-            assert node.canConvertToInt();
-            int intValue = node.intValue();
-            assert intValue >= Short.MIN_VALUE && intValue <= Short.MAX_VALUE;
-            return (short) intValue;
+        public <N> Short parse(N node, WeaverContext<N> context) {
+            return context.parseShort(node);
         }
 
         @Override
-        public JsonNode weave(Short s) {
-            return ShortNode.valueOf(s);
+        public <N> N weave(Short object, WeaverContext<N> context) {
+            return context.persistShort(object);
         }
     };
 
     public static Weaver<Byte> BYTE = new Weaver<Byte>() {
         @Override
-        public Byte parse(JsonNode node) {
-            assert node.canConvertToInt();
-            int intValue = node.intValue();
-            assert intValue >= Byte.MIN_VALUE && intValue <= Byte.MAX_VALUE;
-            return (byte) intValue;
+        public <N> Byte parse(N node, WeaverContext<N> context) {
+            return context.parseByte(node);
         }
 
         @Override
-        public JsonNode weave(Byte b) {
-            return ShortNode.valueOf(b);
+        public <N> N weave(Byte object, WeaverContext<N> context) {
+            return context.persistByte(object);
         }
     };
 
     public static Weaver<Character> CHARACTER = new Weaver<Character>() {
         @Override
-        public Character parse(JsonNode node) {
-            assert node.isTextual();
-            String text = node.asText();
-            assert text.length() == 1;
-            return text.charAt(0);
+        public <N> Character parse(N node, WeaverContext<N> context) {
+            return context.parseCharacter(node);
         }
 
         @Override
-        public JsonNode weave(Character c) {
-            return new TextNode(String.valueOf(c));
+        public <N> N weave(Character object, WeaverContext<N> context) {
+            return context.persistCharacter(object);
         }
     };
 
     public static Weaver<Boolean> BOOLEAN = new Weaver<Boolean>() {
         @Override
-        public Boolean parse(JsonNode node) {
-            assert node.isBoolean();
-            return node.asBoolean();
+        public <N> Boolean parse(N node, WeaverContext<N> context) {
+            return context.parseBoolean(node);
         }
 
         @Override
-        public JsonNode weave(Boolean b) {
-            return BooleanNode.valueOf(b);
+        public <N> N weave(Boolean object, WeaverContext<N> context) {
+            return context.persistBoolean(object);
         }
     };
 
     public static Weaver<String> STRING = new Weaver<String>() {
         @Override
-        public String parse(JsonNode node) {
-            assert node.isTextual();
-            return node.asText();
+        public <N> String parse(N node, WeaverContext<N> context) {
+            return context.parseString(node);
         }
 
         @Override
-        public JsonNode weave(String string) {
-            return new TextNode(string);
+        public <N> N weave(String object, WeaverContext<N> context) {
+            return context.persistString(object);
         }
     };
 
@@ -192,7 +159,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeArray(List<T> list, ArrayWriter writer) {
+            protected void writeArray(List<T> list, ArrayWriter<?> writer) {
                 for (T object : list) {
                     writer.add(object, innerWeaver);
                 }
@@ -212,7 +179,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeArray(Set<T> set, ArrayWriter writer) {
+            protected void writeArray(Set<T> set, ArrayWriter<?> writer) {
                 for (T object : set) {
                     writer.add(object, innerWeaver);
                 }
@@ -232,7 +199,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeArray(SortedSet<T> set, ArrayWriter writer) {
+            protected void writeArray(SortedSet<T> set, ArrayWriter<?> writer) {
                 for (T object : set) {
                     writer.add(object, innerWeaver);
                 }
@@ -252,7 +219,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeArray(SortedSet<T> set, ArrayWriter writer) {
+            protected void writeArray(SortedSet<T> set, ArrayWriter<?> writer) {
                 for (T object : set) {
                     writer.add(object, innerWeaver);
                 }
@@ -272,7 +239,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeObject(Map<String, T> object, ObjectWriter writer) {
+            protected void writeObject(Map<String, T> object, ObjectWriter<?> writer) {
                 for (Map.Entry<String, T> entry : object.entrySet()) {
                     writer.put(entry.getKey(), entry.getValue(), valueWeaver);
                 }
@@ -294,7 +261,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeObject(Map<K, V> object, ObjectWriter writer) {
+            protected void writeObject(Map<K, V> object, ObjectWriter<?> writer) {
                 for (Map.Entry<K, V> entry : object.entrySet()) {
                     writer.put(toStringFunction.apply(entry.getKey()), entry.getValue(), valueWeaver);
                 }
@@ -305,15 +272,13 @@ public class JavaWeavers {
     public static <E extends Enum<E>> Weaver<E> enumOf(final Class<E> enumClass) {
         return new Weaver<E>() {
             @Override
-            public E parse(JsonNode node) {
-                String name = node.asText();
-                return Enum.valueOf(enumClass, name);
+            public <N> E parse(N node, WeaverContext<N> context) {
+                return context.parseEnumValue(node, enumClass);
             }
 
             @Override
-            public JsonNode weave(E object) {
-                String name = object.name();
-                return new TextNode(name);
+            public <N> N weave(E object, WeaverContext<N> context) {
+                return context.persistEnumValue(object, enumClass);
             }
         };
     }

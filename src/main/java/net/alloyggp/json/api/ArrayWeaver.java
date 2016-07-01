@@ -1,29 +1,23 @@
 package net.alloyggp.json.api;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-
-import net.alloyggp.json.ArrayReader;
-import net.alloyggp.json.ArrayWriter;
-
 public abstract class ArrayWeaver<T> implements Weaver<T> {
 
     @Override
-    public T parse(JsonNode node) {
-        assert node.isArray();
-        ArrayNode array = (ArrayNode) node;
-        ArrayReader reader = new ArrayReader(array);
+    public <N> T parse(N node, WeaverContext<N> context) {
+//        assert node.isArray();
+//        ArrayNode array = (ArrayNode) node;
+        ArrayReader reader = context.createArrayReader(node);//new ArrayReader(array);
         return parseArray(reader);
     }
 
     protected abstract T parseArray(ArrayReader reader);
 
     @Override
-    public JsonNode weave(T object) {
-        ArrayWriter writer = new ArrayWriter();
+    public <N> N weave(T object, WeaverContext<N> context) {
+        ArrayWriter<N> writer = context.createArrayWriter();
         writeArray(object, writer);
         return writer.write();
     }
 
-    protected abstract void writeArray(T object, ArrayWriter writer);
+    protected abstract void writeArray(T object, ArrayWriter<?> writer);
 }
