@@ -139,7 +139,7 @@ public class JavaWeavers {
             }
 
             @Override
-            protected void writeArray(T[] list, ArrayWriter writer) {
+            protected void writeArray(T[] list, ArrayWriter<?> writer) {
                 for (T object : list) {
                     writer.add(object, innerWeaver);
                 }

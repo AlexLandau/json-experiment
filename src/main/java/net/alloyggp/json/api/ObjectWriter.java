@@ -1,8 +1,8 @@
 package net.alloyggp.json.api;
 
-public interface ObjectWriter<T> {
+public interface ObjectWriter<N> {
 
-    T write();
+    N write();
 
     <T> void put(String apply, T value, Weaver<T> valueWeaver);
 
