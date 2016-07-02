@@ -1,1 +1,1 @@
-include 'weaver-api', 'weaver-impl-jackson'
+include 'weaver-api', 'weaver-impl-jackson', 'weaver-test-cases'

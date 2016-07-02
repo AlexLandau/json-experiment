@@ -8,6 +8,7 @@ repositories {
 dependencies {
     compile project(':weaver-api')
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
-//    testCompile 'junit:junit:4.12'
+    testCompile project(':weaver-test-cases')
+    testCompile 'junit:junit:4.12'
 }
 
