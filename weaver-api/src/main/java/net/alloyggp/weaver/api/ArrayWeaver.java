@@ -1,4 +1,4 @@
-package net.alloyggp.json.api;
+package net.alloyggp.weaver.api;
 
 public abstract class ArrayWeaver<T> implements Weaver<T> {
 

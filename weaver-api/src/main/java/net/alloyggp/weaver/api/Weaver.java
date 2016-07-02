@@ -1,4 +1,4 @@
-package net.alloyggp.json.api;
+package net.alloyggp.weaver.api;
 
 public interface Weaver<T> {
     <N> T parse(N node, WeaverContext<N> context);

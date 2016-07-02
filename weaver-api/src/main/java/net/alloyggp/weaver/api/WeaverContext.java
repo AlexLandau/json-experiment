@@ -1,4 +1,4 @@
-package net.alloyggp.json.api;
+package net.alloyggp.weaver.api;
 
 public interface WeaverContext<N> {
     ArrayReader createArrayReader(N node);

@@ -1,9 +1,9 @@
-package net.alloyggp.json.jackson;
+package net.alloyggp.weaver.impl.jackson;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import net.alloyggp.json.api.ArrayReader;
-import net.alloyggp.json.api.Weaver;
+import net.alloyggp.weaver.api.ArrayReader;
+import net.alloyggp.weaver.api.Weaver;
 
 //TODO: Should probably be Iterable
 public class JacksonArrayReader implements ArrayReader {

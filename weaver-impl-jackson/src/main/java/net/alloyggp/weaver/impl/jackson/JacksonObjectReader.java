@@ -1,4 +1,4 @@
-package net.alloyggp.json.jackson;
+package net.alloyggp.weaver.impl.jackson;
 
 import javax.annotation.Nullable;
 
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import net.alloyggp.json.api.ObjectReader;
-import net.alloyggp.json.api.Weaver;
+import net.alloyggp.weaver.api.ObjectReader;
+import net.alloyggp.weaver.api.Weaver;
 
 public class JacksonObjectReader implements ObjectReader {
     private final ObjectNode node;

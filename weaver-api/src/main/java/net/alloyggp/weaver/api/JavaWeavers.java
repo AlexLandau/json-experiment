@@ -1,4 +1,4 @@
-package net.alloyggp.json.api;
+package net.alloyggp.weaver.api;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

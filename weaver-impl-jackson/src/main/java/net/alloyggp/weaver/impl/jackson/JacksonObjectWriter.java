@@ -1,11 +1,11 @@
-package net.alloyggp.json.jackson;
+package net.alloyggp.weaver.impl.jackson;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import net.alloyggp.json.api.ObjectWriter;
-import net.alloyggp.json.api.Weaver;
+import net.alloyggp.weaver.api.ObjectWriter;
+import net.alloyggp.weaver.api.Weaver;
 
 public class JacksonObjectWriter implements ObjectWriter<JsonNode> {
     private final ObjectNode node = new ObjectNode(JsonNodeFactory.instance);

@@ -1,4 +1,4 @@
-package net.alloyggp.json.jackson;
+package net.alloyggp.weaver.impl.jackson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
-import net.alloyggp.json.api.ArrayWriter;
-import net.alloyggp.json.api.Weaver;
+import net.alloyggp.weaver.api.ArrayWriter;
+import net.alloyggp.weaver.api.Weaver;
 
 public class JacksonArrayWriter implements ArrayWriter<JsonNode> {
     //TODO: Should this just add to an ArrayNode directly?

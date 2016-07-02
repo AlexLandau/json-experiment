@@ -1,4 +1,4 @@
-package net.alloyggp.json.jackson;
+package net.alloyggp.weaver.impl.jackson;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -11,11 +11,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
-import net.alloyggp.json.api.ArrayReader;
-import net.alloyggp.json.api.ArrayWriter;
-import net.alloyggp.json.api.ObjectReader;
-import net.alloyggp.json.api.ObjectWriter;
-import net.alloyggp.json.api.WeaverContext;
+import net.alloyggp.weaver.api.ArrayReader;
+import net.alloyggp.weaver.api.ArrayWriter;
+import net.alloyggp.weaver.api.ObjectReader;
+import net.alloyggp.weaver.api.ObjectWriter;
+import net.alloyggp.weaver.api.WeaverContext;
 
 public class JacksonWeaverContext implements WeaverContext<JsonNode> {
     public static final JacksonWeaverContext INSTANCE = new JacksonWeaverContext();

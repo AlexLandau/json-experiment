@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':weaver-api')
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
+//    testCompile 'junit:junit:4.12'
+}
+
